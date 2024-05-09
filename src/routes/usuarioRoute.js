@@ -4,6 +4,8 @@ import verifyAdemiro from '../middleware/verifyAdemiro';
 export default (app) => {
   app.get('/usuario', verifyAdemiro, usuarioController.get);
   app.get('/usuario/:id', verifyAdemiro, usuarioController.get);
+  app.get('/usuario/relatorio-medico/:id', usuarioController.tioSam);
+  app.get('/usuario/tortura/:id', usuarioController.calanguinho);
   app.post('/usuario/register', verifyAdemiro, usuarioController.register);
   app.post('/usuario/login', usuarioController.loginFunciton);
   app.post('/usuario', verifyAdemiro, usuarioController.create);

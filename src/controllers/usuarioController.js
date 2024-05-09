@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import usuarioModel from '../models/usuarioModel';
+import { sequelize } from '../config/config';
 
 const get = async (req, res) => {
   try {
@@ -208,10 +209,40 @@ const loginFunciton = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).send({
-      message: 'Ops!',
-      response: error.message,
     });
   }
+};
+
+const tioSam = async (req, res) => {
+  const response = await sequelize.query(`
+    select
+      u.id,
+      u.nome,
+      s.tipo_exame,
+      s.resultado,
+      s.data_exame
+    from usuario as u
+    JOIN saude_bem_estar as s on s.id_usuario = u.id
+  `).then((a) => a[0]);
+  return res.status(201).send({
+    message: 'Dados Encontrados!',
+    response,
+  });
+};
+
+const calanguinho = async (req, res) => {
+  const response = await sequelize.query(`
+    SELECT
+      u.nome
+    FROM usuario AS u
+    JOIN recursos AS r ON r.id_usuario = u.id
+    GROUP BY u.nome
+    HAVING COUNT(r.id) > 4;
+  `).then((a) => a[0]);
+  return res.status(201).send({
+    message: 'Dados Encontrados!',
+    response,
+  });
 };
 
 export default {
@@ -220,5 +251,7 @@ export default {
   update,
   destroy,
   register,
+  tioSam,
+  calanguinho,
   loginFunciton,
 };
