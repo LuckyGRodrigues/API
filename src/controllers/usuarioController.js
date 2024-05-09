@@ -213,7 +213,7 @@ const loginFunciton = async (req, res) => {
   }
 };
 
-const tioSam = async (req, res) => {
+const tioSam = async (_, res) => {
   const response = await sequelize.query(`
     select
       u.id,
@@ -230,7 +230,7 @@ const tioSam = async (req, res) => {
   });
 };
 
-const calanguinho = async (req, res) => {
+const calanguinho = async (_, res) => {
   const response = await sequelize.query(`
     SELECT
       u.nome
