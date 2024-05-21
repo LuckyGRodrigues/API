@@ -5,5 +5,5 @@ export default (app) => {
   app.get('/projetos/:id', projetosController.get);
   app.post('/projetos', projetosController.create);
   app.patch('/projetos/:id', projetosController.update);
-  app.delete('/projetos/:id', projetosController.destroy);
+  app.delete('/projetos/destroy/:id', projetosController.destroy);
 };

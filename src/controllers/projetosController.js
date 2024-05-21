@@ -118,20 +118,22 @@ const destroy = async (req, res) => {
     });
 
     if (!response) {
-      return res.status(500).send({
+      return res.status(404).send({
         message: 'Id Não Encontrado na Base',
         response: [],
       });
     }
 
     await response.destroy();
+    return res.status(203).send({
+      message: 'projeto deletado com sucesso',
+    });
   } catch (error) {
     return res.status(500).send({
       message: 'Ops!',
       response: error.message,
     });
   }
-  return 0;
 };
 
 export default {
